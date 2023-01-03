@@ -18,10 +18,10 @@ import java.io.Serializable;
 public class Comment implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false,columnDefinition = "varchar(500)")
+    @Column(nullable = false)
     private String body;
 
     @ManyToOne

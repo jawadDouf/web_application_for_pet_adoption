@@ -18,29 +18,29 @@ import java.util.List;
 public class Publication implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false,columnDefinition = "varchar(40)")
+    @Column(nullable = false)
     private String person_name;
 
-    @Column(nullable = false,columnDefinition = "varchar(255)")
+    @Column(nullable = false)
     private String person_email;
 
-    @Column(nullable = false,columnDefinition = "varchar(20)")
+    @Column(nullable = false)
     private String person_phone_number;
 
-    @Column(nullable = false,columnDefinition = "varchar(40)")
+    @Column(nullable = false)
     private String person_adresse;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false,columnDefinition = "varchar(255)")
+    @Column(nullable = false)
     private Animal_Type animal_type;
 
-    @Column(nullable = false,columnDefinition = "varchar(500)")
+    @Column(nullable = false)
     private String animal_description;
 
-    @Column(nullable = false,columnDefinition = "varchar(500)")
+    @Column(nullable = false)
     private String publication_description;
 
     @ManyToOne

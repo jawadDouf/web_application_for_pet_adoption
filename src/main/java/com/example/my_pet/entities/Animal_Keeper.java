@@ -14,7 +14,7 @@ public class Animal_Keeper implements Serializable {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Animal_Keeper_id", nullable = false)
     private int id;
 

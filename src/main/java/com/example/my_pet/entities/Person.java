@@ -18,22 +18,22 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(length=20)
+    @Column(nullable = false)
     private String first_name;
 
     @Column(columnDefinition = "varchar(20) default 'unknown'")
     private String last_name;
 
-    @Column(nullable = false,columnDefinition = "varchar(255)")
+    @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false,columnDefinition = "varchar(255)")
+    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false,columnDefinition = "varchar(200)")
+    @Column(nullable = false)
     private String adresse;
 
-    @Column(nullable = false,columnDefinition = "varchar(200)")
+    @Column(nullable = false)
     private String phone_number;
 
     @OneToMany(mappedBy="person")
