@@ -18,7 +18,7 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column()
+    @Column(nullable = false)
     private String first_name;
 
     @Column(columnDefinition = "varchar(20) default 'unknown'")
