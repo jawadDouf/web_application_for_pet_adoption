@@ -10,32 +10,29 @@ import java.util.List;
 
 @Entity
 @Table(name = "animals")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class Animal implements Serializable {
 
 
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "animal_id", nullable = false)
     private int id;
 
-    @Column(columnDefinition = "varchar(50) default 'unknown'")
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false,columnDefinition = "integer")
+    @Column(nullable = false)
     private int age;
 
-    @Column(columnDefinition = "varchar(500)")
+    @Column(nullable = false)
     private String description;
 
     @Column(columnDefinition = "tinyint(1) default 0")
     private boolean status;
 
-    @Column(nullable = false,columnDefinition = "integer")
+    @Column(nullable = false)
     private int original_owner_id;
 
     @ElementCollection
