@@ -22,12 +22,12 @@ public class Comment_Controller {
         this.commentService = commentService;
     }
     //Get all comments by publication id
-    @GetMapping("/publication/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<List<Comment_Dto>> getAllCommentsByPublicationId(@PathVariable int id){
         try {
             return new ResponseEntity<>(commentService.getAllCommentsByPublicationId(id), HttpStatus.OK);
         }catch (Exception e){
-            throw new BadRequestException("There is no publication with this id");
+            throw new BadRequestException("There is no comments with this id");
         }
     }
 }

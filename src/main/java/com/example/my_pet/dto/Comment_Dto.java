@@ -25,14 +25,13 @@ public class Comment_Dto {
 
     private Person person;
 
-    private Publication publication;
+
 
     public Comment_Dto to_Dto(Comment comment){
         return Comment_Dto.builder()
                 .id(comment.getId())
                 .body(comment.getBody())
                 .person(comment.getPerson())
-                .publication(comment.getPublication())
                 .build();
     }
 }
