@@ -56,7 +56,7 @@ public class Animal_Service {
     }
 
 
-    //Gett all animals of a user
+    //Get all animals of a user
 
     public List<Animal_Dto> getAllAnimalsById(int id){
         //Get the animals

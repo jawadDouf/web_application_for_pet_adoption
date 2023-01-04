@@ -32,11 +32,11 @@ public class Publication implements Serializable {
     private String publication_description;
 
     @ManyToOne
-    @JoinColumn(name="person_id",nullable = false)
+    @JoinColumn(name="personId")
     private Person person;
 
     @ManyToOne
-    @JoinColumn(name="animal_id",nullable = false)
+    @JoinColumn(name="animalId")
     private Animal animal;
 
     @OneToMany(mappedBy = "publication")

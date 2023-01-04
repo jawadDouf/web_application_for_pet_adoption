@@ -43,14 +43,14 @@ public class Publication_Controller {
 
     //Get one publication by id
     @GetMapping("one/{id}")
-    public ResponseEntity<Publication_Dto> getOnePublication(int id){
+    public ResponseEntity<Publication_Dto> getOnePublication(@PathVariable int id){
             return new ResponseEntity<>(publicationService.getPublicationById(id),HttpStatus.OK);
 
     }
 
     //Delete one publication by id
     @DeleteMapping ("one/{id}")
-    public ResponseEntity<String> deletePublication(int id){
+    public ResponseEntity<String> deletePublication(@PathVariable int id){
         try {
             publicationService.deletePublication(id);
             return new ResponseEntity<>("Publication is deleted",HttpStatus.OK);
@@ -61,12 +61,32 @@ public class Publication_Controller {
 
     //Update one publication by id
     @PutMapping("one/{id}")
-    public ResponseEntity<String> updatePublication(int id, @RequestBody Publication publication){
+    public ResponseEntity<String> updatePublication(@PathVariable int id, @RequestBody Publication publication){
         try {
             publicationService.updatePublication(publication,id);
             return new ResponseEntity<>("Publication is updated",HttpStatus.OK);
         }catch (Exception e){
             throw new BadRequestException("There is no publication with this id");
+        }
+    }
+
+    //Get all publications by animal id
+    @GetMapping("animal/{id}")
+    public ResponseEntity<List<Publication_Dto>> getAllPublicationByAnimalId(@PathVariable int id){
+        try {
+            return new ResponseEntity<>(publicationService.getAllPublicationByAnimal(id),HttpStatus.OK);
+        }catch (Exception e){
+            throw new BadRequestException("There is no publications with this animal id");
+        }
+    }
+
+    //Get all publications by person id
+    @GetMapping("person/{id}")
+    public ResponseEntity<List<Publication_Dto>> getAllPublicationByPersonId(@PathVariable int id){
+        try {
+            return new ResponseEntity<>(publicationService.getAllPublicationByPerson(id),HttpStatus.OK);
+        }catch (Exception e){
+            throw new BadRequestException("There is no publications with this person id");
         }
     }
 

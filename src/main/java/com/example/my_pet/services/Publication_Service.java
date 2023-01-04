@@ -89,4 +89,30 @@ public class Publication_Service {
 
     }
 
+    //Get all publications of an animal
+    public List<Publication_Dto> getAllPublicationByAnimal(int id){
+        //Get all the publications
+        List<Publication> publications = publicationRepo.getAllByAnimalId(id);
+        //Turn the publications to dto publications
+        List<Publication_Dto> publicationDtos = publications
+                .stream()
+                .map(pub -> publicationDto.to_dto(pub,pub.getPerson(),pub.getAnimal()))
+                .collect(Collectors.toList());
+        //Return the publications
+        return publicationDtos;
+    }
+
+    //Get all publications of a person
+    public List<Publication_Dto> getAllPublicationByPerson(int id){
+        //Get all the publications
+        List<Publication> publications = publicationRepo.getAllByPersonId(id);
+        //Turn the publications to dto publications
+        List<Publication_Dto> publicationDtos = publications
+                .stream()
+                .map(pub -> publicationDto.to_dto(pub,pub.getPerson(),pub.getAnimal()))
+                .collect(Collectors.toList());
+        //Return the publications
+        return publicationDtos;
+    }
+
 }
