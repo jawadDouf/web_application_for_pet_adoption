@@ -12,5 +12,7 @@ public interface Animal_Repo extends JpaRepository<Animal,Integer> {
 
     void deleteById(int id);
 
-    List<Animal> getAllByOriginal_owner_id(int id);
+    List<Animal> getAllByOriginalOwnerId(int id);
+
+
 }
