@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 
@@ -17,38 +19,28 @@ import java.util.List;
 @AllArgsConstructor
 public class Publication implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private int id;
+     @Column(nullable = false)
+     private LocalDate start_date;
 
-    @Column(nullable = false)
-    private String person_name;
-
-    @Column(nullable = false)
-    private String person_email;
-
-    @Column(nullable = false)
-    private String person_phone_number;
-
-    @Column(nullable = false)
-    private String person_adresse;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Animal_Type animal_type;
-
-    @Column(nullable = false)
-    private String animal_description;
+     @Column(nullable = false)
+     private LocalDate end_date;
 
     @Column(nullable = false)
     private String publication_description;
 
     @ManyToOne
+    @JoinColumn(name="person_id",nullable = false)
     private Person person;
 
     @ManyToOne
+    @JoinColumn(name="animal_id",nullable = false)
     private Animal animal;
 
     @OneToMany(mappedBy = "publication")
     private List<Comment> comments;
+
+
 }

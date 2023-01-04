@@ -44,7 +44,7 @@ public class Animal implements Serializable {
     @Enumerated(EnumType.STRING)
     private Animal_Type type;
 
-    @OneToMany(mappedBy = "animal")
+    @OneToMany(mappedBy = "animal",fetch = FetchType.EAGER)
     private List<Publication> publications;
 
 

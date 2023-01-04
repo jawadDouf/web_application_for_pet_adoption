@@ -39,7 +39,8 @@ public class Person implements Serializable {
     @OneToMany(mappedBy="person")
     private List<Animal_Keeper> animals;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person",fetch = FetchType.EAGER)
+
     private List<Publication> publications;
 
     @OneToMany(mappedBy = "person")
