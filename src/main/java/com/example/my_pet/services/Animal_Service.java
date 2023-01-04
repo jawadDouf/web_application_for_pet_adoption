@@ -1,6 +1,7 @@
 package com.example.my_pet.services;
 
 
+import com.example.my_pet.dto.Animal_Dto;
 import com.example.my_pet.entities.Animal;
 import com.example.my_pet.exceptions.NotFoundException;
 import com.example.my_pet.repositories.Animal_Repo;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class Animal_Service {
@@ -47,15 +49,23 @@ public class Animal_Service {
         animal1.setAge(animal.getAge());
         animal1.setName(animal.getName());
         animal1.setDescription(animal.getDescription());
-        animal1.setType(animal1.getType());
-
-        return animal1;
+        animal1.setType(animal.getType());
+        animal1.setOriginalOwnerId(animal.getOriginalOwnerId());
+        //Save the animal
+        return this.save(animal1);
     }
 
 
     //Gett all animals of a user
-    public List<Animal> getAllAnimalsById(int id){
-        return animalRepo.getAllByOriginal_owner_id(id);
+
+    public List<Animal_Dto> getAllAnimalsById(int id){
+        //Get the animals
+        List<Animal> animals = animalRepo.getAllByOriginalOwnerId(id);
+        //transfer this animals to dto_animal
+        List<Animal_Dto> animalsdto =  animals.stream().map(animal ->
+            Animal_Dto.to_dto(animal)
+        ).collect(Collectors.toList());
+        return animalsdto;
     }
 
 }

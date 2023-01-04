@@ -1,5 +1,6 @@
 package com.example.my_pet.controllers;
 
+import com.example.my_pet.dto.Animal_Dto;
 import com.example.my_pet.entities.Animal;
 import com.example.my_pet.exceptions.BadRequestException;
 import com.example.my_pet.exceptions.NotFoundException;
@@ -38,9 +39,9 @@ public class Animal_Controller {
     }
     //Return one animal by id
     @GetMapping("/one/{id}")
-    public ResponseEntity<Animal> getOneAnimal(@PathVariable int id){
-            //Bring the element
-            return new ResponseEntity<>(animalService.getAnimalById(id),HttpStatus.OK);
+    public ResponseEntity<Animal_Dto> getOneAnimal(@PathVariable int id){
+            //Bring the element and turn it to dto
+            return new ResponseEntity<>(Animal_Dto.to_dto(animalService.getAnimalById(id)),HttpStatus.OK);
     }
 
     //Delete Element by id
@@ -59,17 +60,17 @@ public class Animal_Controller {
 
     //Update element by id
     @PutMapping("/one/{id}")
-    public ResponseEntity<Animal> updateAnimal(@RequestBody Animal animal,@PathVariable int id){
+    public ResponseEntity<Animal_Dto> updateAnimal(@RequestBody Animal animal,@PathVariable int id){
         try {
             //Update the element
-           return new ResponseEntity<>(animalService.updateAnimal(animal,id),HttpStatus.CREATED);
+           return new ResponseEntity<>(Animal_Dto.to_dto(animalService.updateAnimal(animal,id)),HttpStatus.CREATED);
         }catch (Exception e){
             throw new BadRequestException("Something wrong in the form of the data you entered");
         }
     }
 
     @GetMapping("/myAnimals/{id}")
-    public ResponseEntity<List<Animal>> getAllAnimalOfUser(@PathVariable int id){
+    public ResponseEntity<List<Animal_Dto>> getAllAnimalOfUser(@PathVariable int id){
 
         try{
             //get all the elements of specific user
@@ -78,4 +79,6 @@ public class Animal_Controller {
             throw new NotFoundException("There is no user with this id");
         }
     }
+
+
 }

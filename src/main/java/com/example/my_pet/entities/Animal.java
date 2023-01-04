@@ -33,7 +33,7 @@ public class Animal implements Serializable {
     private boolean status;
 
     @Column(nullable = false)
-    private int original_owner_id;
+    private int originalOwnerId;
 
     @ElementCollection
     private List<String> photos;
