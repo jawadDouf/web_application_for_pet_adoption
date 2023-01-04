@@ -25,8 +25,10 @@ public class Comment implements Serializable {
     private String body;
 
     @ManyToOne
+    @JoinColumn(name = "personId")
     private Person person;
 
     @ManyToOne
+    @JoinColumn(name = "publicationId")
     private Publication publication;
 }
