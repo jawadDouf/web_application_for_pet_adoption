@@ -37,7 +37,7 @@ public class Publication implements Serializable {
     @JoinColumn(name="animalId")
     private Animal animal;
 
-    @OneToMany(mappedBy = "publication")
+   @OneToMany(mappedBy = "publication")
     private List<Comment> comments;
 
 

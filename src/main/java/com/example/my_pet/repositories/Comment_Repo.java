@@ -11,5 +11,5 @@ import java.util.List;
 public interface Comment_Repo extends JpaRepository<Comment, Integer>{
 
 
-    List<Comment> getAllByPublicationId(int id);
+    List<Comment> findAllByPublicationId(int id);
 }

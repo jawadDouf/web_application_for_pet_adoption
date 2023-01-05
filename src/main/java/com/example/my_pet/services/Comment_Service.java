@@ -26,12 +26,24 @@ public class Comment_Service {
     //Get all comments by publication id
     public List<Comment_Dto> getAllCommentsByPublicationId(int id){
         //Get all the comments
-        List<Comment> comments = commentRepo.getAllByPublicationId(id);
+        List<Comment> comments = commentRepo.findAllByPublicationId(id);
+        for (int i = 0;i<comments.size();i++){
+            System.out.println(comments.get(i).getPersonId());
+        }
+       // return comments;
+
         //Turn the comments to dto comments
         List<Comment_Dto> commentsDto = comments
                 .stream()
                 .map(comment->commentDto.to_Dto(comment))
                 .collect(Collectors.toList());
         return commentsDto;
+
+
+    }
+
+    //Create A comment
+    public Comment save(Comment comment){
+        return commentRepo.save(comment);
     }
 }

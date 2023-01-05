@@ -1,5 +1,9 @@
 package com.example.my_pet.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +15,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "comments")
 
-@Getter
+
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,11 +28,48 @@ public class Comment implements Serializable {
     @Column(nullable = false)
     private String body;
 
-    @ManyToOne
-    @JoinColumn(name = "personId")
-    private Person person;
+    @Column(name = "person_id")
+     private long personId;
+
+    @Column(name = "publicationId")
+    private long publicationId;
 
     @ManyToOne
-    @JoinColumn(name = "publicationId")
+    @JoinColumn(name = "person_id", insertable = false, updatable = false)
+
+    private Person person;
+
+
+    @ManyToOne
+    @JoinColumn(name = "publicationId" , insertable = false,updatable = false)
+
     private Publication publication;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+
+    public long getPersonId() {
+        return personId;
+    }
+
+
+    public long getPublicationId() {
+        return publicationId;
+    }
+
+   @JsonBackReference
+    public Person getPerson() {
+        return person;
+    }
+
+  @JsonBackReference
+    public Publication getPublication() {
+        return publication;
+    }
 }
