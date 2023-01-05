@@ -1,6 +1,6 @@
 package com.example.my_pet.services;
 
-import com.example.my_pet.entities.Person;
+import com.example.my_pet.model.entities.Person;
 import com.example.my_pet.exceptions.NotFoundException;
 import com.example.my_pet.repositories.Person_Repo;
 import org.springframework.stereotype.Service;

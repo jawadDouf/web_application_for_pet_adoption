@@ -2,7 +2,7 @@ package com.example.my_pet.services;
 
 
 import com.example.my_pet.dto.Comment_Dto;
-import com.example.my_pet.entities.Comment;
+import com.example.my_pet.model.entities.Comment;
 import com.example.my_pet.repositories.Comment_Repo;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+
 public class Comment_Service {
 
 

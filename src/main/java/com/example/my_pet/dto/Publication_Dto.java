@@ -1,13 +1,10 @@
 package com.example.my_pet.dto;
 
 
-import com.example.my_pet.entities.Animal;
-import com.example.my_pet.entities.Person;
-import com.example.my_pet.entities.Publication;
-import com.example.my_pet.entities.enums.Animal_Type;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import com.example.my_pet.model.entities.Animal;
+import com.example.my_pet.model.entities.Person;
+import com.example.my_pet.model.entities.Publication;
+import com.example.my_pet.model.enums.Animal_Type;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

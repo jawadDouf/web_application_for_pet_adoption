@@ -1,4 +1,4 @@
-package com.example.my_pet.entities;
+package com.example.my_pet.model.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

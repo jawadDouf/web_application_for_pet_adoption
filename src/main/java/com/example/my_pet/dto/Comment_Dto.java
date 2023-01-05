@@ -1,10 +1,7 @@
 package com.example.my_pet.dto;
 
-import com.example.my_pet.entities.Comment;
-import com.example.my_pet.entities.Person;
-import com.example.my_pet.entities.Publication;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
+import com.example.my_pet.model.entities.Comment;
+import com.example.my_pet.model.entities.Person;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

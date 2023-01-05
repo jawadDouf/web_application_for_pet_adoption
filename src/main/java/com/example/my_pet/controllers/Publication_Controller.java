@@ -1,7 +1,7 @@
 package com.example.my_pet.controllers;
 
 import com.example.my_pet.dto.Publication_Dto;
-import com.example.my_pet.entities.Publication;
+import com.example.my_pet.model.entities.Publication;
 import com.example.my_pet.exceptions.BadRequestException;
 import com.example.my_pet.services.Publication_Service;
 import org.springframework.http.HttpStatus;
