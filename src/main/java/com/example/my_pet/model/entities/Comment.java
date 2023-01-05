@@ -68,7 +68,7 @@ public class Comment implements Serializable {
         return person;
     }
 
-  @JsonBackReference
+   @JsonBackReference
     public Publication getPublication() {
         return publication;
     }

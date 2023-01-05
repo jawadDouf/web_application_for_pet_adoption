@@ -2,6 +2,7 @@ package com.example.my_pet.model.entities;
 
 
 import com.example.my_pet.model.enums.Animal_Type;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,11 +40,13 @@ public class Animal implements Serializable {
     @ElementCollection
     private List<String> photos;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "animal")
     private List<Animal_Keeper> keepers;
 
     @Enumerated(EnumType.STRING)
     private Animal_Type type;
+
 
     @OneToMany(mappedBy = "animal",fetch = FetchType.EAGER)
     private List<Publication> publications;
