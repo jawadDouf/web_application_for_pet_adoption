@@ -15,13 +15,14 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Component
 @Scope("prototype")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Publication_Dto {
 
 
@@ -41,14 +42,18 @@ public class Publication_Dto {
 
     private String publication_description;
 
-    private List<Comment> comments_dto;
+    private List<Comment_Dto> comments_dtos;
 
 
     public Publication_Dto to_dto(Publication publication, Person person, Animal animal){
 
-        //Bring the comments
-        //publication.getComments().stream().map(comment->comments_dto.add(comment)).collect(C);
+        //Bring the comments and turns the to dtos
+        List<Comment_Dto> commentDs =comments_dtos = publication
+                .getComments()
+                .stream()
+                .map(comment -> new Comment_Dto().to_Dto(comment)).collect(Collectors.toList());
 
+        //Return the publications
         return Publication_Dto.builder().id(publication.getId())
                 .animal_description(animal.getDescription())
                 .animal_type(animal.getType())
@@ -57,6 +62,7 @@ public class Publication_Dto {
                 .person_phone_number(person.getPhone_number())
                 .publication_description(publication.getPublication_description())
                 .person_adresse(person.getAdresse())
+                .comments_dtos(commentDs)
                 .build();
     }
 }

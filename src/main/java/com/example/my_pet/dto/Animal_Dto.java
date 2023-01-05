@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 
 @Builder
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Component
 @Scope("prototype")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Animal_Dto {
 
 

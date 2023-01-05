@@ -11,15 +11,15 @@ import org.springframework.stereotype.Component;
 
 @Builder
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Component
 @Scope("prototype")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Comment_Dto {
 
     private int id;
     private String body;
-    private Person person;
+    private Person_Dto person_dto;
 
 
 
@@ -36,7 +36,7 @@ public class Comment_Dto {
         return Comment_Dto.builder()
                 .id(comment.getId())
                 .body(comment.getBody())
-                .person(comment.getPerson())
+                .person_dto(new Person_Dto().to_dto(comment.getPerson()))
                 .build();
     }
 }
