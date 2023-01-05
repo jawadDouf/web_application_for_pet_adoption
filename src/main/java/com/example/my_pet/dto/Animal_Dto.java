@@ -1,21 +1,20 @@
 package com.example.my_pet.dto;
 
-import com.example.my_pet.entities.Animal;
-import com.example.my_pet.entities.enums.Animal_Type;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.my_pet.model.entities.Animal;
+import com.example.my_pet.model.enums.Animal_Type;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Builder
 @Data
-@NoArgsConstructor
+@Component
+@Scope("prototype")
 @AllArgsConstructor
+@NoArgsConstructor
 public class Animal_Dto {
 
 
@@ -27,16 +26,16 @@ public class Animal_Dto {
     private int originalOwnerId;
     private Animal_Type type;
 
-    public static Animal_Dto to_dto(Animal animal){
+    public  Animal_Dto to_dto(Animal animal){
 
         return Animal_Dto.builder()
                          .id(animal.getId())
-                          .age(animal.getAge())
-                          .description(animal.getDescription())
-                        .originalOwnerId(animal.getOriginalOwnerId())
-                        .name(animal.getName())
+                         .age(animal.getAge())
+                         .description(animal.getDescription())
+                         .originalOwnerId(animal.getOriginalOwnerId())
+                         .name(animal.getName())
                          .type(animal.getType())
-                        .status(animal.isStatus()).build();
+                         .status(animal.isStatus()).build();
 
     }
 

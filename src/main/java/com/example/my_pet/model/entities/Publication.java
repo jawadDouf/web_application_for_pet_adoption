@@ -1,12 +1,10 @@
-package com.example.my_pet.entities;
+package com.example.my_pet.model.entities;
 
-import com.example.my_pet.entities.enums.Animal_Type;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 
@@ -39,7 +37,7 @@ public class Publication implements Serializable {
     @JoinColumn(name="animalId")
     private Animal animal;
 
-    @OneToMany(mappedBy = "publication")
+   @OneToMany(mappedBy = "publication")
     private List<Comment> comments;
 
 

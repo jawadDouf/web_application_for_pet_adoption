@@ -2,10 +2,9 @@ package com.example.my_pet.services;
 
 
 import com.example.my_pet.dto.Animal_Dto;
-import com.example.my_pet.entities.Animal;
+import com.example.my_pet.model.entities.Animal;
 import com.example.my_pet.exceptions.NotFoundException;
 import com.example.my_pet.repositories.Animal_Repo;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +16,11 @@ public class Animal_Service {
 
     private Animal_Repo animalRepo;
 
-    public Animal_Service(Animal_Repo animalRepo) {
+    private Animal_Dto animal_dto;
+
+    public Animal_Service(Animal_Repo animalRepo,Animal_Dto animal_dto) {
         this.animalRepo = animalRepo;
+        this.animal_dto = animal_dto;
     }
 
     //Create Animal
@@ -27,10 +29,10 @@ public class Animal_Service {
     }
 
     //Get Animal by id
-    public Animal getAnimalById(int id){
+    public Animal_Dto getAnimalById(int id){
         Optional<Animal> animal = animalRepo.findById(id);
         if(animal.isPresent()){
-            return animal.get();
+            return animal_dto.to_dto(animal.get());
         }else{
             throw new NotFoundException("There is no animal with this id");
         }
@@ -42,9 +44,9 @@ public class Animal_Service {
     }
 
     //update animal
-    public Animal updateAnimal(Animal animal,int id){
+    public Animal_Dto updateAnimal(Animal animal,int id){
         //Get the element
-        Animal animal1 = this.getAnimalById(id);
+        Animal animal1 = animalRepo.findById(id).get();
         //update the element
         animal1.setAge(animal.getAge());
         animal1.setName(animal.getName());
@@ -52,7 +54,7 @@ public class Animal_Service {
         animal1.setType(animal.getType());
         animal1.setOriginalOwnerId(animal.getOriginalOwnerId());
         //Save the animal
-        return this.save(animal1);
+        return animal_dto.to_dto(this.save(animal1));
     }
 
 
@@ -63,7 +65,7 @@ public class Animal_Service {
         List<Animal> animals = animalRepo.getAllByOriginalOwnerId(id);
         //transfer this animals to dto_animal
         List<Animal_Dto> animalsdto =  animals.stream().map(animal ->
-            Animal_Dto.to_dto(animal)
+            animal_dto.to_dto(animal)
         ).collect(Collectors.toList());
         return animalsdto;
     }

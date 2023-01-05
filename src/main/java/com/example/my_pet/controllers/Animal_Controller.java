@@ -1,10 +1,9 @@
 package com.example.my_pet.controllers;
 
 import com.example.my_pet.dto.Animal_Dto;
-import com.example.my_pet.entities.Animal;
+import com.example.my_pet.model.entities.Animal;
 import com.example.my_pet.exceptions.BadRequestException;
 import com.example.my_pet.exceptions.NotFoundException;
-import com.example.my_pet.repositories.Animal_Repo;
 import com.example.my_pet.services.Animal_Service;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +40,7 @@ public class Animal_Controller {
     @GetMapping("/one/{id}")
     public ResponseEntity<Animal_Dto> getOneAnimal(@PathVariable int id){
             //Bring the element and turn it to dto
-            return new ResponseEntity<>(Animal_Dto.to_dto(animalService.getAnimalById(id)),HttpStatus.OK);
+            return new ResponseEntity<>(animalService.getAnimalById(id),HttpStatus.OK);
     }
 
     //Delete Element by id
@@ -63,7 +62,7 @@ public class Animal_Controller {
     public ResponseEntity<Animal_Dto> updateAnimal(@RequestBody Animal animal,@PathVariable int id){
         try {
             //Update the element
-           return new ResponseEntity<>(Animal_Dto.to_dto(animalService.updateAnimal(animal,id)),HttpStatus.CREATED);
+           return new ResponseEntity<>(animalService.updateAnimal(animal,id),HttpStatus.CREATED);
         }catch (Exception e){
             throw new BadRequestException("Something wrong in the form of the data you entered");
         }

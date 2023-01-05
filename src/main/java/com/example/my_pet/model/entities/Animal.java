@@ -1,7 +1,7 @@
-package com.example.my_pet.entities;
+package com.example.my_pet.model.entities;
 
 
-import com.example.my_pet.entities.enums.Animal_Type;
+import com.example.my_pet.model.enums.Animal_Type;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "animals")
 @Data
+
 public class Animal implements Serializable {
 
 

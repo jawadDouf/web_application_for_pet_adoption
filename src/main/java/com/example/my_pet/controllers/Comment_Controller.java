@@ -2,13 +2,11 @@ package com.example.my_pet.controllers;
 
 import com.example.my_pet.dto.Comment_Dto;
 import com.example.my_pet.exceptions.BadRequestException;
+import com.example.my_pet.model.entities.Comment;
 import com.example.my_pet.services.Comment_Service;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,9 +23,22 @@ public class Comment_Controller {
     @GetMapping("/{id}")
     public ResponseEntity<List<Comment_Dto>> getAllCommentsByPublicationId(@PathVariable int id){
         try {
-            return new ResponseEntity<>(commentService.getAllCommentsByPublicationId(id), HttpStatus.OK);
+            return new ResponseEntity<>(commentService.getAllCommentsByPublicationId(id),HttpStatus.OK);
         }catch (Exception e){
             throw new BadRequestException("There is no comments with this id");
+        }
+    }
+
+    //Create Comment
+    @PostMapping()
+    public ResponseEntity<String> createComment(@RequestBody Comment comment){
+        try {
+            //Create the comment => Add the comment ot the database
+            commentService.save(comment);
+            //Return the response
+            return new ResponseEntity<>("Comment is created",HttpStatus.OK);
+        }catch (Exception e){
+            throw new BadRequestException("Something wrong with the syntax,type or form of data you entered");
         }
     }
 }

@@ -1,8 +1,7 @@
 package com.example.my_pet.services;
 
 import com.example.my_pet.dto.Publication_Dto;
-import com.example.my_pet.entities.Animal;
-import com.example.my_pet.entities.Publication;
+import com.example.my_pet.model.entities.Publication;
 import com.example.my_pet.exceptions.NotFoundException;
 import com.example.my_pet.repositories.Publication_Repo;
 import org.springframework.stereotype.Service;
