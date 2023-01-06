@@ -63,12 +63,12 @@ public class Comment implements Serializable {
         return publicationId;
     }
 
-   @JsonBackReference
+    @JsonBackReference
     public Person getPerson() {
         return person;
     }
 
-   @JsonBackReference
+    @JsonBackReference
     public Publication getPublication() {
         return publication;
     }
