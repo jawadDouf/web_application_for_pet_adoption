@@ -18,8 +18,9 @@ public class Security_Config {
 
 
     @Autowired
-    public Security_Config(JwtAuthEntryPoint jwtAuthEntryPoint) {
+    public Security_Config(JwtAuthEntryPoint jwtAuthEntryPoint, CustomeUserDetailsService userDetailsService) {
         this.jwtAuthEntryPoint = jwtAuthEntryPoint;
+        this.userDetailsService = userDetailsService;
     }
 
     @Bean
@@ -33,10 +34,12 @@ public class Security_Config {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/api/auth/**","/api/user/publications").permitAll()
-                                .requestMatchers("/api/user/**").hasRole("USER").anyRequest().authenticated()
+                        auth -> auth.requestMatchers("/api/publications/**").permitAll()
+                                .requestMatchers("/api/user/**").hasRole("User").anyRequest().authenticated()
                 );
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+
 }
