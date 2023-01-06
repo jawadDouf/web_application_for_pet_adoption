@@ -8,7 +8,7 @@ import lombok.Data;
 public class Auth_Response_Dto{
 
     private String accessToken;
-    private String tokenType ="Bearer ";
+    private String tokenType ="Bearer";
 
     public Auth_Response_Dto(String accessToken){
 

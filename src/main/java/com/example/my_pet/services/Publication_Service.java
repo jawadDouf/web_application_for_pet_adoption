@@ -27,13 +27,16 @@ public class Publication_Service {
     //get all publications
     public List<Publication_Dto> getAllPublication(){
         //bring all the publication
+        System.out.println("Publication_Service.getAllPublication");
         List<Publication> publications = publicationRepo.findAll();
+        System.out.println("Publication_Service.getAllPublication2");
         //Turn Publication to dto publication
         List<Publication_Dto> publicationDtos = publications
                 .stream()
                 .map(
                         pub -> publicationDto.to_dto(pub,pub.getPerson(),pub.getAnimal()))
                 .collect(Collectors.toList());
+        System.out.println("Publication_Service.getAllPublication4");
         //Return the publications dtos
         return publicationDtos;
     }

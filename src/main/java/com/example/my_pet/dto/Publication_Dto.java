@@ -46,9 +46,8 @@ public class Publication_Dto {
 
 
     public Publication_Dto to_dto(Publication publication, Person person, Animal animal){
-
         //Bring the comments and turns the to dtos
-        List<Comment_Dto> commentDs =comments_dtos = publication
+        List<Comment_Dto> commentDs =  publication
                 .getComments()
                 .stream()
                 .map(comment -> new Comment_Dto().to_Dto(comment)).collect(Collectors.toList());

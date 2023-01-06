@@ -28,12 +28,12 @@ public class Animal_Keeper implements Serializable {
         return id;
     }
 
-    @JsonBackReference
+
     public Animal getAnimal() {
         return animal;
     }
 
-    @JsonBackReference
+
     public Person getPerson() {
         return person;
     }

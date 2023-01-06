@@ -15,6 +15,9 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Person implements Serializable {
 
     @Id
@@ -52,7 +55,7 @@ public class Person implements Serializable {
     private List<Comment> comments;
 
 
-    @ManyToMany(mappedBy = "persons")
+    @ManyToMany(mappedBy = "persons",fetch = FetchType.EAGER)
     private List<Roles> roles;
 
     public int getId() {
@@ -83,12 +86,12 @@ public class Person implements Serializable {
         return phone_number;
     }
 
-    @JsonManagedReference
+
     public List<Animal_Keeper> getAnimals() {
         return animals;
     }
 
-    @JsonManagedReference
+
     public List<Comment> getComments() {
         return comments;
     }

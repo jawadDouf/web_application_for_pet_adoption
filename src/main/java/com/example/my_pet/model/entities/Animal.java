@@ -2,7 +2,9 @@ package com.example.my_pet.model.entities;
 
 
 import com.example.my_pet.model.enums.Animal_Type;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +14,9 @@ import java.util.List;
 @Entity
 @Table(name = "animals")
 @Data
-
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Animal implements Serializable {
 
 
@@ -40,7 +44,7 @@ public class Animal implements Serializable {
     @ElementCollection
     private List<String> photos;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "animal")
     private List<Animal_Keeper> keepers;
 

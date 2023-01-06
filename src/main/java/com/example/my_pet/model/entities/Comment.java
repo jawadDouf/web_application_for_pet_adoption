@@ -14,11 +14,12 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "comments")
-
-
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Comment implements Serializable {
 
     @Id
@@ -63,12 +64,12 @@ public class Comment implements Serializable {
         return publicationId;
     }
 
-    @JsonBackReference
+
     public Person getPerson() {
         return person;
     }
 
-    @JsonBackReference
+
     public Publication getPublication() {
         return publication;
     }

@@ -4,6 +4,7 @@ package com.example.my_pet.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -39,8 +40,11 @@ public class Security_Config {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/api/authentification/**","/api/publications/**").permitAll()
-                                .requestMatchers("/api/user/**").hasRole("User").anyRequest().authenticated()
+                        auth -> auth.requestMatchers(HttpMethod.GET,"/api/publications/**")
+                                .permitAll()
+                                .requestMatchers("/api/authentification/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/api/animals/**").permitAll()
+                                .requestMatchers("/api/user/**","/api/comments/**","/api/animals/**").hasRole("User").anyRequest().authenticated()
                 );
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
