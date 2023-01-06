@@ -42,7 +42,7 @@ public class Security_Config {
                 .authorizeHttpRequests(
                         auth -> auth.requestMatchers(HttpMethod.GET,"/api/publications/**")
                                 .permitAll()
-                                .requestMatchers("/api/authentification/**").permitAll()
+                                .requestMatchers("/api/authentification/**","/api/person/**").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/api/animals/**").permitAll()
                                 .requestMatchers("/api/user/**","/api/comments/**","/api/animals/**").hasRole("User").anyRequest().authenticated()
                 );
