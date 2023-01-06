@@ -1,5 +1,7 @@
 package com.example.my_pet.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +17,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Publication implements Serializable {
 
      @Id
@@ -37,8 +42,9 @@ public class Publication implements Serializable {
     @JoinColumn(name="animalId")
     private Animal animal;
 
-   @OneToMany(mappedBy = "publication")
+    @OneToMany(mappedBy = "publication")
     private List<Comment> comments;
+
 
 
 }

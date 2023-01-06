@@ -1,5 +1,6 @@
 package com.example.my_pet.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,7 +8,6 @@ import java.io.Serializable;
 
 @Entity
 @Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Animal_Keeper implements Serializable {
@@ -24,8 +24,17 @@ public class Animal_Keeper implements Serializable {
     @ManyToOne
     private Person person;
 
+    public int getId() {
+        return id;
+    }
 
 
+    public Animal getAnimal() {
+        return animal;
+    }
 
 
+    public Person getPerson() {
+        return person;
+    }
 }
