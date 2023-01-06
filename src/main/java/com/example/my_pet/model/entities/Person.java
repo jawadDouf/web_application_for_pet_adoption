@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "persons")
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIdentityInfo(
@@ -54,49 +54,11 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person")
     private List<Comment> comments;
 
+    @OneToMany(mappedBy = "person")
+    private List<Reply> replies;
 
     @ManyToMany(mappedBy = "persons",fetch = FetchType.EAGER)
     private List<Roles> roles;
 
-    public int getId() {
-        return id;
-    }
 
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-
-    public List<Animal_Keeper> getAnimals() {
-        return animals;
-    }
-
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public List<Roles> getRoles() {
-        return roles;
-    }
 }
