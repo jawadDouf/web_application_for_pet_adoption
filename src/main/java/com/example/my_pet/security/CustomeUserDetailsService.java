@@ -4,7 +4,6 @@ import com.example.my_pet.model.entities.Person;
 import com.example.my_pet.model.entities.Roles;
 import com.example.my_pet.repositories.Person_Repo;
 import com.example.my_pet.repositories.Role_Repo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
