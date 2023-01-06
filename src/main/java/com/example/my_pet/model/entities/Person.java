@@ -51,6 +51,8 @@ public class Person implements Serializable {
     private List<Comment> comments;
 
 
+    @ManyToMany(mappedBy = "persons")
+    private List<Roles> roles;
 
     public int getId() {
         return id;
@@ -88,5 +90,9 @@ public class Person implements Serializable {
     @JsonManagedReference
     public List<Comment> getComments() {
         return comments;
+    }
+
+    public List<Roles> getRoles() {
+        return roles;
     }
 }
