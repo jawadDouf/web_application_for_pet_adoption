@@ -14,5 +14,8 @@ public interface Animal_Repo extends JpaRepository<Animal,Integer> {
 
     List<Animal> getAllByOriginalOwnerId(int id);
 
+    //Get the last inserted animal
+    Animal findFirstByOrderByIdDesc();
+
 
 }

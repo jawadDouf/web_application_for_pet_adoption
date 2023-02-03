@@ -60,5 +60,8 @@ public class Person implements Serializable {
     @ManyToMany(mappedBy = "persons",fetch = FetchType.EAGER)
     private List<Roles> roles;
 
+    @OneToOne(mappedBy = "person")
+    private Image profileImage;
+
 
 }

@@ -1,8 +1,6 @@
 package com.example.my_pet.dto;
 
 import com.example.my_pet.model.entities.Comment;
-import com.example.my_pet.model.entities.Person;
-import com.example.my_pet.model.entities.Reply;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,26 +17,26 @@ import java.util.stream.Collectors;
 @Scope("prototype")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comment_Dto {
+public class CommentDto {
 
     private int id;
     private String body;
-    private Person_Dto person_dto;
+    private PersonDto person_dto;
 
-    private List<Reply_Dto> replies;
+    private List<ReplyDto> replies;
 
 
-    public Comment_Dto to_Dto(Comment comment){
+    public CommentDto to_Dto(Comment comment){
         //Prepare the replies => turn replies to replies_dto
-        List<Reply_Dto> replyDtos = comment.getReplies()
+        List<ReplyDto> replyDtos = comment.getReplies()
                 .stream()
-                .map(reply-> new Reply_Dto().to_dto(reply))
+                .map(reply-> new ReplyDto().to_dto(reply))
                 .collect(Collectors.toList());
         //Return the dto
-        return Comment_Dto.builder()
+        return CommentDto.builder()
                 .id(comment.getId())
                 .body(comment.getBody())
-                .person_dto(new Person_Dto().to_dto(comment.getPerson()))
+                .person_dto(new PersonDto().to_dto(comment.getPerson()))
                 .replies(replyDtos)
                 .build();
     }

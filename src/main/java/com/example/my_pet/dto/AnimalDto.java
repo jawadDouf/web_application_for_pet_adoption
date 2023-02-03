@@ -1,7 +1,6 @@
 package com.example.my_pet.dto;
 
 import com.example.my_pet.model.entities.Animal;
-import com.example.my_pet.model.entities.Animal_Keeper;
 import com.example.my_pet.model.enums.Animal_Type;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 @Scope("prototype")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Animal_Dto {
+public class AnimalDto {
 
 
     private int id;
@@ -31,18 +30,21 @@ public class Animal_Dto {
     private int originalOwnerId;
     private Animal_Type type;
 
-    private List<Animal_Keeper_Dto> keepers;
+    private List<ImageDto> images;
+    private List<AnimalKeeperDto> keepers;
 
-    public  Animal_Dto to_dto(Animal animal){
+
+
+    public AnimalDto to_dto(Animal animal){
 
         //Prepare the keepers of the animal
-        List<Animal_Keeper_Dto> keeps = animal.getKeepers()
+        List<AnimalKeeperDto> keeps = animal.getKeepers()
                 .stream()
-                .map(k->new Animal_Keeper_Dto().to_dto(k))
+                .map(k->new AnimalKeeperDto().to_dto(k))
                 .collect(Collectors.toList());
         //
 
-        return Animal_Dto.builder()
+        return AnimalDto.builder()
                          .id(animal.getId())
                          .age(animal.getAge())
                          .description(animal.getDescription())
@@ -50,6 +52,7 @@ public class Animal_Dto {
                          .name(animal.getName())
                          .type(animal.getType())
                          .keepers(keeps)
+                         .images(animal.getImages().stream().map(i->new ImageDto().to_dto(i)).collect(Collectors.toList()))
                          .status(animal.isStatus())
                          .build();
 

@@ -12,4 +12,6 @@ public interface Comment_Repo extends JpaRepository<Comment, Integer>{
 
 
     List<Comment> findAllByPublicationId(int id);
+
+    Comment findTopByOrderByIdDesc();
 }

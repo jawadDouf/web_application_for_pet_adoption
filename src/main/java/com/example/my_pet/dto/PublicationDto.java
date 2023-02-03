@@ -2,7 +2,6 @@ package com.example.my_pet.dto;
 
 
 import com.example.my_pet.model.entities.Animal;
-import com.example.my_pet.model.entities.Comment;
 import com.example.my_pet.model.entities.Person;
 import com.example.my_pet.model.entities.Publication;
 import com.example.my_pet.model.enums.Animal_Type;
@@ -10,10 +9,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
 @Scope("prototype")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Publication_Dto {
+public class PublicationDto {
 
 
     private int id;
@@ -42,18 +41,27 @@ public class Publication_Dto {
 
     private String publication_description;
 
-    private List<Comment_Dto> comments_dtos;
+    private LocalDate start_date;
+
+    private LocalDate end_date;
+    private int person_id;
+
+    private int animal_id;
+    private List<CommentDto> comments_dtos;
 
 
-    public Publication_Dto to_dto(Publication publication, Person person, Animal animal){
+
+
+
+    public PublicationDto to_dto(Publication publication, Person person, Animal animal){
         //Bring the comments and turns the to dtos
-        List<Comment_Dto> commentDs =  publication
+        List<CommentDto> commentDs =  publication
                 .getComments()
                 .stream()
-                .map(comment -> new Comment_Dto().to_Dto(comment)).collect(Collectors.toList());
+                .map(comment -> new CommentDto().to_Dto(comment)).collect(Collectors.toList());
 
         //Return the publications
-        return Publication_Dto.builder().id(publication.getId())
+        return PublicationDto.builder().id(publication.getId())
                 .animal_description(animal.getDescription())
                 .animal_type(animal.getType())
                 .person_email(person.getEmail())
@@ -61,7 +69,11 @@ public class Publication_Dto {
                 .person_phone_number(person.getPhone_number())
                 .publication_description(publication.getPublication_description())
                 .person_adresse(person.getAdresse())
-                .comments_dtos(commentDs)
+                .start_date(publication.getStart_date())
+                .end_date(publication.getEnd_date())
+                .person_id(person.getId())
+                .animal_id(animal.getId())
+              .comments_dtos(commentDs)
                 .build();
     }
 }

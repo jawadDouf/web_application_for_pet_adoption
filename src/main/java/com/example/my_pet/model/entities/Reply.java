@@ -20,21 +20,28 @@ import java.io.Serializable;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
 public class Reply implements Serializable {
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "comment_reply",nullable = false)
     private String body;
 
     @ManyToOne
-    @JoinColumn(name = "comment_id")
+    @JoinColumn(name = "comment_id",insertable = false,updatable = false)
     private Comment comment;
 
     @ManyToOne
-    @JoinColumn(name = "person_id")
+    @JoinColumn(name = "person_id",insertable = false,updatable = false)
     private Person person;
+
+    @Column(name = "person_id")
+    private int personId;
+
+    @Column(name = "comment_id")
+    private int commentId;
 
 
 }

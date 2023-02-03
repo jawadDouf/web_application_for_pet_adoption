@@ -28,14 +28,13 @@ public class Comment implements Serializable {
     private String body;
 
     @Column(name = "person_id")
-     private long personId;
+     private int personId;
 
     @Column(name = "publicationId")
-    private long publicationId;
+    private int publicationId;
 
     @ManyToOne
-    @JoinColumn(name = "person_id", insertable = false, updatable = false)
-
+    @JoinColumn(name = "person_id",insertable = false,updatable = false)
     private Person person;
 
 
@@ -43,8 +42,7 @@ public class Comment implements Serializable {
     private List<Reply> replies;
 
     @ManyToOne
-    @JoinColumn(name = "publicationId" , insertable = false,updatable = false)
-
+    @JoinColumn(name = "publicationId",insertable = false,updatable = false)
     private Publication publication;
 
 

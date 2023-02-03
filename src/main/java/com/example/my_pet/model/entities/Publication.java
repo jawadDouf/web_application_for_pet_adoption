@@ -34,12 +34,19 @@ public class Publication implements Serializable {
     @Column(nullable = false)
     private String publication_description;
 
+
+    @Column(name = "personId")
+    private int personId;
+
+    @Column(name = "animalId")
+    private int animalId;
     @ManyToOne
-    @JoinColumn(name="personId")
+    @JoinColumn(name="personId",insertable = false,updatable = false)
     private Person person;
 
+
     @ManyToOne
-    @JoinColumn(name="animalId")
+    @JoinColumn(name="animalId",updatable = false,insertable = false)
     private Animal animal;
 
     @OneToMany(mappedBy = "publication")
