@@ -41,10 +41,6 @@ public class Animal implements Serializable {
     @Column(nullable = false)
     private int originalOwnerId;
 
-    @ElementCollection
-    private List<String> photos;
-
-
     @OneToMany(mappedBy = "animal")
     private List<Animal_Keeper> keepers;
 
@@ -55,5 +51,7 @@ public class Animal implements Serializable {
     @OneToMany(mappedBy = "animal",fetch = FetchType.EAGER)
     private List<Publication> publications;
 
+    @OneToMany(mappedBy = "animal",fetch = FetchType.EAGER)
+    private List<Image> images;
 
 }

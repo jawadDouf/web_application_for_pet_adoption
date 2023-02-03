@@ -1,8 +1,8 @@
 package com.example.my_pet.controllers;
 
-import com.example.my_pet.dto.Auth_Response_Dto;
-import com.example.my_pet.dto.Login_Dto;
-import com.example.my_pet.dto.Register_Dto;
+import com.example.my_pet.dto.AuthResponseDto;
+import com.example.my_pet.dto.LoginDto;
+import com.example.my_pet.dto.RegisterDto;
 import com.example.my_pet.model.entities.Person;
 import com.example.my_pet.model.entities.Roles;
 import com.example.my_pet.repositories.Person_Repo;
@@ -15,16 +15,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
 @RestController
 @RequestMapping("api/authentification")
-public class Auth_Controller {
+@CrossOrigin(origins="http://localhost:4200")
+public class AuthController {
 
     private AuthenticationManager authenticationManager;
     private  Person_Repo personRepo;
@@ -33,7 +31,7 @@ public class Auth_Controller {
     private  JWTGenerator jwtGenerator;
 
 
-    public Auth_Controller(AuthenticationManager authenticationManager, Person_Repo personRepo, Role_Repo roleRepo, PasswordEncoder passwordEncoder, JWTGenerator jwtGenerator) {
+    public AuthController(AuthenticationManager authenticationManager, Person_Repo personRepo, Role_Repo roleRepo, PasswordEncoder passwordEncoder, JWTGenerator jwtGenerator) {
         this.authenticationManager = authenticationManager;
         this.personRepo = personRepo;
         this.roleRepo = roleRepo;
@@ -45,19 +43,15 @@ public class Auth_Controller {
 
 
     @PostMapping("/login")
-    public ResponseEntity<Auth_Response_Dto> login(@RequestBody Login_Dto loginDto){
-        System.out.println("p");
+    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(),loginDto.getPassword()));
-        System.out.println("e");
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println("n");
         String token = jwtGenerator.generateToken(authentication);
-        System.out.println("bxx :" + token);
-        return new ResponseEntity<>(new Auth_Response_Dto(token), HttpStatus.OK);
+        return new ResponseEntity<>(new AuthResponseDto(token,personRepo.findByEmail(loginDto.getEmail()).getId()), HttpStatus.OK);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody Register_Dto registerDto){
+    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
         if(personRepo.existsByEmail(registerDto.getEmail())){
             return new ResponseEntity<>("Email is taken", HttpStatus.BAD_REQUEST);
         }

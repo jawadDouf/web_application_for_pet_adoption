@@ -40,11 +40,12 @@ public class Security_Config {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(
-                        auth -> auth.requestMatchers(HttpMethod.GET,"/api/publications/**")
+                        auth -> auth
+                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/api/publications/**","/api/animals/**","/api/files/**","/api/comments/**")
                                 .permitAll()
                                 .requestMatchers("/api/authentification/**","/api/person/**").permitAll()
-                                .requestMatchers(HttpMethod.GET,"/api/animals/**").permitAll()
-                                .requestMatchers("/api/user/**","/api/comments/**","/api/animals/**").hasRole("User").anyRequest().authenticated()
+                                .requestMatchers("/api/user/**").hasRole("User").anyRequest().authenticated()
                 );
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();

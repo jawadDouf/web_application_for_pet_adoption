@@ -1,6 +1,6 @@
 package com.example.my_pet.services;
 
-import com.example.my_pet.dto.Publication_Dto;
+import com.example.my_pet.dto.PublicationDto;
 import com.example.my_pet.model.entities.Publication;
 import com.example.my_pet.exceptions.NotFoundException;
 import com.example.my_pet.repositories.Publication_Repo;
@@ -11,32 +11,33 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class Publication_Service {
+public class PublicationService {
 
     private Publication_Repo publicationRepo;
 
-    private Publication_Dto publicationDto;
+    private PublicationDto publicationDto;
 
 
 
-    public Publication_Service(Publication_Repo publicationRepo, Publication_Dto publicationDto) {
+    public PublicationService(Publication_Repo publicationRepo, PublicationDto publicationDto) {
         this.publicationRepo = publicationRepo;
         this.publicationDto = publicationDto;
 
     }
     //get all publications
-    public List<Publication_Dto> getAllPublication(){
+    public List<PublicationDto> getAllPublication(){
         //bring all the publication
-        System.out.println("Publication_Service.getAllPublication");
+
         List<Publication> publications = publicationRepo.findAll();
-        System.out.println("Publication_Service.getAllPublication2");
+
+
         //Turn Publication to dto publication
-        List<Publication_Dto> publicationDtos = publications
+        List<PublicationDto> publicationDtos = publications
                 .stream()
                 .map(
                         pub -> publicationDto.to_dto(pub,pub.getPerson(),pub.getAnimal()))
                 .collect(Collectors.toList());
-        System.out.println("Publication_Service.getAllPublication4");
+
         //Return the publications dtos
         return publicationDtos;
     }
@@ -47,13 +48,13 @@ public class Publication_Service {
     }
 
     //Get a publication by id
-    public Publication_Dto getPublicationById(int id){
+    public PublicationDto getPublicationById(int id){
         //Get the publication
         Optional<Publication> publication = publicationRepo.findById(id);
         //Check if the publication is present
         if(publication.isPresent()) {
             //Turn the publication to dto publication
-            Publication_Dto publication_dto = publicationDto.to_dto(publication.get(), publication.get().getPerson(), publication.get().getAnimal());
+            PublicationDto publication_dto = publicationDto.to_dto(publication.get(), publication.get().getPerson(), publication.get().getAnimal());
             //Return the publication
             return publication_dto;
         }else{
@@ -68,7 +69,7 @@ public class Publication_Service {
     }
 
     //Update a publication
-    public Publication_Dto updatePublication(Publication publication, int id){
+    public PublicationDto updatePublication(Publication publication, int id){
         //Get the publication
         Optional<Publication> publication1 = publicationRepo.findById(id);
         //Check if the publication is present
@@ -82,7 +83,7 @@ public class Publication_Service {
             //Save the publication
             Publication publication2 = publicationRepo.save(publication1.get());
             //Turn the publication to dto publication
-            Publication_Dto publication_dto = publicationDto.to_dto(publication2, publication2.getPerson(), publication2.getAnimal());
+            PublicationDto publication_dto = publicationDto.to_dto(publication2, publication2.getPerson(), publication2.getAnimal());
             //Return the publication
             return publication_dto;
         }else{
@@ -92,11 +93,11 @@ public class Publication_Service {
     }
 
     //Get all publications of an animal
-    public List<Publication_Dto> getAllPublicationByAnimal(int id){
+    public List<PublicationDto> getAllPublicationByAnimal(int id){
         //Get all the publications
         List<Publication> publications = publicationRepo.getAllByAnimalId(id);
         //Turn the publications to dto publications
-        List<Publication_Dto> publicationDtos = publications
+        List<PublicationDto> publicationDtos = publications
                 .stream()
                 .map(pub -> publicationDto.to_dto(pub,pub.getPerson(),pub.getAnimal()))
                 .collect(Collectors.toList());
@@ -105,11 +106,11 @@ public class Publication_Service {
     }
 
     //Get all publications of a person
-    public List<Publication_Dto> getAllPublicationByPerson(int id){
+    public List<PublicationDto> getAllPublicationByPerson(int id){
         //Get all the publications
         List<Publication> publications = publicationRepo.getAllByPersonId(id);
         //Turn the publications to dto publications
-        List<Publication_Dto> publicationDtos = publications
+        List<PublicationDto> publicationDtos = publications
                 .stream()
                 .map(pub -> publicationDto.to_dto(pub,pub.getPerson(),pub.getAnimal()))
                 .collect(Collectors.toList());

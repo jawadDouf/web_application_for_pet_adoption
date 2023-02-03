@@ -9,7 +9,7 @@ import lombok.*;
 import java.io.Serializable;
 
 @Entity
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIdentityInfo(

@@ -1,10 +1,9 @@
 package com.example.my_pet.dto;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
-public class Register_Dto {
+public class RegisterDto {
     private int id;
     private String email;
 

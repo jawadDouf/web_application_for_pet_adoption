@@ -1,18 +1,18 @@
 package com.example.my_pet.dto;
 
-import lombok.Builder;
 import lombok.Data;
 
 
 @Data
-public class Auth_Response_Dto{
+public class AuthResponseDto {
 
     private String accessToken;
     private String tokenType ="Bearer";
 
-    public Auth_Response_Dto(String accessToken){
-
+    private int personId;
+    public AuthResponseDto(String accessToken,int personId){
         this.accessToken=accessToken;
+        this.personId=personId;
     }
 
 

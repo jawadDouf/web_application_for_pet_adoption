@@ -4,6 +4,7 @@ import com.example.my_pet.model.entities.Person;
 import com.example.my_pet.model.entities.Roles;
 import com.example.my_pet.repositories.Person_Repo;
 import com.example.my_pet.repositories.Role_Repo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -20,19 +21,18 @@ import java.util.stream.Collectors;
 @Service
 public class CustomeUserDetailsService implements UserDetailsService {
 
-    private final Person_Repo personRepo;
-    private final Role_Repo roleRepository;
+    private  Person_Repo personRepo;
+    private Role_Repo roleRepository;
 
 
-    public CustomeUserDetailsService(Person_Repo personRepo,
-                                     Role_Repo roleRepository) {
+    public CustomeUserDetailsService(Person_Repo personRepo, Role_Repo roleRepository) {
         this.personRepo = personRepo;
         this.roleRepository = roleRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Person person = personRepo.findByEmail(email).orElseThrow(()-> new UsernameNotFoundException("email not found"));
+        Person person = personRepo.findByEmail(email);
         return new User(person.getEmail(),person.getPassword(),mapRolesToAuthorities(person.getRoles()));
     }
 

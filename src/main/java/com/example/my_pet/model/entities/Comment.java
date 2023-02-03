@@ -5,16 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "comments")
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIdentityInfo(
@@ -30,47 +28,22 @@ public class Comment implements Serializable {
     private String body;
 
     @Column(name = "person_id")
-     private long personId;
+     private int personId;
 
     @Column(name = "publicationId")
-    private long publicationId;
+    private int publicationId;
 
     @ManyToOne
-    @JoinColumn(name = "person_id", insertable = false, updatable = false)
-
+    @JoinColumn(name = "person_id",insertable = false,updatable = false)
     private Person person;
 
 
-    @ManyToOne
-    @JoinColumn(name = "publicationId" , insertable = false,updatable = false)
+    @OneToMany(mappedBy = "comment")
+    private List<Reply> replies;
 
+    @ManyToOne
+    @JoinColumn(name = "publicationId",insertable = false,updatable = false)
     private Publication publication;
 
-    public int getId() {
-        return id;
-    }
 
-    public String getBody() {
-        return body;
-    }
-
-
-    public long getPersonId() {
-        return personId;
-    }
-
-
-    public long getPublicationId() {
-        return publicationId;
-    }
-
-
-    public Person getPerson() {
-        return person;
-    }
-
-
-    public Publication getPublication() {
-        return publication;
-    }
 }

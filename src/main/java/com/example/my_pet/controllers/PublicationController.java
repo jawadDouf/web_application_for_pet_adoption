@@ -1,28 +1,30 @@
 package com.example.my_pet.controllers;
 
-import com.example.my_pet.dto.Publication_Dto;
+import com.example.my_pet.dto.PublicationDto;
 import com.example.my_pet.model.entities.Publication;
 import com.example.my_pet.exceptions.BadRequestException;
-import com.example.my_pet.services.Publication_Service;
+import com.example.my_pet.services.PublicationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/publications")
-public class Publication_Controller {
+@CrossOrigin(origins="http://localhost:4200")
+public class PublicationController {
 
-    private Publication_Service publicationService;
+    private PublicationService publicationService;
 
-    public Publication_Controller(Publication_Service publicationService) {
+    public PublicationController(PublicationService publicationService) {
         this.publicationService = publicationService;
     }
 
     //Get all publications
     @GetMapping()
-    public ResponseEntity<List<Publication_Dto>> getAllPublications(){
+    public ResponseEntity<List<PublicationDto>> getAllPublications(){
         try {
             return new ResponseEntity<>(publicationService.getAllPublication(), HttpStatus.OK);
         }catch (Exception e){
@@ -30,7 +32,10 @@ public class Publication_Controller {
         }
     }
 
+
+
     //Create a publication
+
     @PostMapping()
     public ResponseEntity<String> createPublication(@RequestBody Publication publication){
         try {
@@ -42,8 +47,9 @@ public class Publication_Controller {
     }
 
     //Get one publication by id
+
     @GetMapping("one/{id}")
-    public ResponseEntity<Publication_Dto> getOnePublication(@PathVariable int id){
+    public ResponseEntity<PublicationDto> getOnePublication(@PathVariable int id){
             return new ResponseEntity<>(publicationService.getPublicationById(id),HttpStatus.OK);
 
     }
@@ -72,7 +78,7 @@ public class Publication_Controller {
 
     //Get all publications by animal id
     @GetMapping("animal/{id}")
-    public ResponseEntity<List<Publication_Dto>> getAllPublicationByAnimalId(@PathVariable int id){
+    public ResponseEntity<List<PublicationDto>> getAllPublicationByAnimalId(@PathVariable int id){
         try {
             return new ResponseEntity<>(publicationService.getAllPublicationByAnimal(id),HttpStatus.OK);
         }catch (Exception e){
@@ -82,7 +88,7 @@ public class Publication_Controller {
 
     //Get all publications by person id
     @GetMapping("person/{id}")
-    public ResponseEntity<List<Publication_Dto>> getAllPublicationByPersonId(@PathVariable int id){
+    public ResponseEntity<List<PublicationDto>> getAllPublicationByPersonId(@PathVariable int id){
         try {
             return new ResponseEntity<>(publicationService.getAllPublicationByPerson(id),HttpStatus.OK);
         }catch (Exception e){

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Person_Dto {
+public class PersonDto {
 
 
     private int id;
@@ -40,13 +40,13 @@ public class Person_Dto {
 
 
     //Create to dto method
-    public Person_Dto to_dto(Person person){
+    public PersonDto to_dto(Person person){
 
         //Prepare Animals kept
 
 
         //Return the person and its animals
-        return Person_Dto.builder()
+        return PersonDto.builder()
                 .id(person.getId())
                 .first_name(person.getFirst_name())
                 .last_name(person.getLast_name())

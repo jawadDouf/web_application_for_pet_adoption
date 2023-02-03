@@ -1,6 +1,6 @@
 package com.example.my_pet.services;
 
-import com.example.my_pet.dto.Person_Dto;
+import com.example.my_pet.dto.PersonDto;
 import com.example.my_pet.model.entities.Person;
 import com.example.my_pet.exceptions.NotFoundException;
 import com.example.my_pet.repositories.Person_Repo;
@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class Person_Service {
+public class PersonService {
 
     private Person_Repo personRepo;
 
-    private Person_Dto personDto;
+    private PersonDto personDto;
 
-    public Person_Service(Person_Repo personRepo, Person_Dto personDto) {
+    public PersonService(Person_Repo personRepo, PersonDto personDto) {
         this.personRepo = personRepo;
         this.personDto = personDto;
     }
 
     //get a person by id
-    public Person_Dto getPersonById(int id){
+    public PersonDto getPersonById(int id){
         //Get the person
         Optional<Person> person = personRepo.findById(id);
         //Check if the person is present
